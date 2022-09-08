@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+{% include 'header.html' %}
+
+<body class="main">
+
+<div class="banner">
+Top 10 UK
+</div>
+
+
+<div class="welcome_bar">
+  <script src="{{url_for('static', filename='js/get_time.js')}}"></script>
+</div>
+
+
+<div class="content">
+
+<div class = content_box>
+
+
+
+<div class = track_table>
+  <div>
+{% for artist in artists %}
+{% for position in positions %}
+<b>{{position}}</b> {{artist}}
+<br>
+{% endfor %}
+{% endfor %}
+</div>
+
+<div>
+{% for song in songs %}
+
+<b>Song title:</b> {{song}}
+<br>
+{% endfor %}
+</div>
+
+</div>
+</div>
+</div>
+
+{% include 'footer.html' %}
+
+</body>
+</html>
