@@ -18,15 +18,58 @@ Top 10 UK
 
 <div class = content_box>
 
-
+  <!--div>
+    {{ tracks }}
+  </div-->
 
 <div class = track_table>
+
+<div>
+
+
+  {% for x in tracks['artist'] %}
+  {{x}}<br>
+  {% endfor %}
+<br>
+</div>
+
+<div>
+
+  {% for x in tracks['song'] %}
+  {{x}}<br>
+  {% endfor %}
+<br>
+</div>
+
+<div>
+
+  {% for x in tracks['popularity'] %}
+  {{x}}<br>
+  {% endfor %}
+<br>
+</div>
+
+<div>
+
+  {% for x in tracks['Track ID'] %}
+  {{x}}<br>
+  {% endfor %}
+  <br>
+</div>
+
+<!--div>
+{% set myList = [1,5,3,4,2] %}
+{{ myList[0] }}
+{{ myList[1] }}
+</div-->
+</div>
+<!--div class = track_table>
   <div>
 {% for artist in artists %}
-{% for position in positions %}
-<b>{{position}}</b> {{artist}}
+
+<b>{{positions}}</b> {{artist}}
 <br>
-{% endfor %}
+
 {% endfor %}
 </div>
 
@@ -38,7 +81,7 @@ Top 10 UK
 {% endfor %}
 </div>
 
-</div>
+</div-->
 </div>
 </div>
 

@@ -77,14 +77,9 @@ def get_track_id(results):
     return track_id_lst
 
 print("------------------------------------------------------------------------")
-sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id="1b96334f98ab4ba18849b3997a2123a7",
-                                                          client_secret="4da0147f650b4d9a9460338470e89149"))
 
 
-playlist_id = 'spotify:user:spotifycharts:playlist:37i9dQZEVXbLnolsZ8PSNw'
-results = sp.playlist_tracks(playlist_id, limit=15)
-
-def get_tracks():
+def get_tracks(results):
     long_artist_lst = []
     long_song_lst = []
     long_popularity_lst = []
@@ -95,4 +90,10 @@ def get_tracks():
     long_popularity_lst.extend(get_popularity(results))
     long_track_id_lst.extend(get_track_id(results))
 
-    return long_artist_lst
+    top_10_dict = {'artist':long_artist_lst,
+                    'song': long_song_lst,
+                    'popularity': long_popularity_lst,
+                    'Track ID': long_track_id_lst
+                    }
+
+    return top_10_dict

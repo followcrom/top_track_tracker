@@ -115,7 +115,9 @@
   }
 
 .track_table {
-    column-count: 2;
+    height: 60vh;
+    column-count: 4;
+    column-width: auto;
     column-gap: 40px;
     column-rule-style: solid;
     column-rule-width: 1px;

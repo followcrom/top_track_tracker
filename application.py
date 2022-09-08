@@ -12,35 +12,44 @@ setx FLASK_APP "application.py"
 
 Deactivate the Environment on Windows:
 deactivate <name of environment>
+
+Create 'SpotifyClientCredentials()
+$env:SPOTIPY_CLIENT_ID='1b96334f98ab4ba18849b3997a2123a7'
+$env:SPOTIPY_CLIENT_SECRET='4da0147f650b4d9a9460338470e89149'
+$env:SPOTIPY_REDIRECT_URI='http://example.com/callback/'
+
+
+Windows Command Prompt
+setx SPOTIPY_CLIENT_ID '1b96334f98ab4ba18849b3997a2123a7'
+SUCCESS: Specified value was saved.
+setx SPOTIPY_CLIENT_SECRET '4da0147f650b4d9a9460338470e89149'
 """
 
 
 from flask import Flask, render_template, jsonify
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
+from spotipy.oauth2 import SpotifyOAuth
 from spotty import get_tracks, get_artist, get_song
+import os
 
 application = Flask(__name__)
 
 
-
-
 @application.route('/')
 def top_5():
-    sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id="1b96334f98ab4ba18849b3997a2123a7",
-                                                              client_secret="4da0147f650b4d9a9460338470e89149"))
-    playlist_id = 'spotify:user:spotifycharts:playlist:37i9dQZEVXbLnolsZ8PSNw'
-    results = sp.playlist_tracks(playlist_id, limit=15)
-    artists = get_artist(results)
-    songs = get_song(results)
-    positions = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
-    return render_template('index.html', artists=artists,
-                            songs=songs, positions=positions)
+    client_id = os.environ['SPOTIPY_CLIENT_ID']
+    client_secret = os.environ['SPOTIPY_CLIENT_SECRET']
+    sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=client_id,
+                                                              client_secret=client_secret))
 
-@application.route('/api/jobs')
-def list_jobs():
-    return jsonify(TRACKS)
+    playlist_id = 'spotify:user:spotifycharts:playlist:37i9dQZEVXbLnolsZ8PSNw'
+    results = sp.playlist_tracks(playlist_id, limit=10)
+    global tracks
+    tracks = get_tracks(results)
+    return render_template('index.html', tracks=tracks)
+
 
 
 if __name__ == "__main__":
-    application.run(host="127.0.0.1", port=80, debug=True)
+    application.run(debug=True)
