@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+{% include 'header.html' %}
+
+<body class="main">
+
+<div class="banner">
+10 Latest Additions
+</div>
+
+
+<div class="welcome_bar">
+  <script src="{{url_for('static', filename='js/get_time.js')}}"></script>
+</div>
+
+
+<table width=100%>
+
+<tr><td>{{ name }}</td></tr>
+
+<tr>
+<th>Artist</th>
+<th>Song</th>
+<th>Popularity</th>
+<th>URL</th>
+</tr>
+
+
+<tr>
+
+  <td class = artist>
+    {% for artist in data.artist %}
+    {{ artist }}<br>
+    {% endfor %}
+</td>
+
+  <td width=20%>
+    {% for song in data.song %}
+    {{ song }}<br>
+    {% endfor %}
+</td>
+
+  <td width=20%>
+    {% for score in data.popularity %}
+    {{ score }}<br>
+    {% endfor %}
+
+</td>
+
+  <td class = url>
+    {% for url in data.Link %}
+    <a class = "one" href="{{ url }}">{{ url }}</a>
+    {% endfor %}
+  </td>
+
+</tr>
+
+
+
+
+</table>
+
+
+<!--div>
+{% set myList = [1,5,3,4,2] %}
+{{ myList[0] }}
+{{ myList[1] }}
+</div-->
+</div>
+<!--div class = track_table>
+  <div>
+{% for artist in artists %}
+
+<b>{{positions}}</b> {{artist}}
+<br>
+
+{% endfor %}
+</div>
+
+<div>
+{% for song in songs %}
+
+<b>Song title:</b> {{song}}
+<br>
+{% endfor %}
+</div>
+
+</div-->
+
+
+
+{% include 'footer.html' %}
+
+</body>
+</html>
